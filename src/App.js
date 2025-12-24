@@ -8,6 +8,7 @@ import ContactModal from "./components/ContactModal";
 import Home from "./pages/Home";
 import ProductsPage from "./pages/ProductsPage";
 import AboutPage from "./pages/AboutPage";
+import Footer from "./components/Footer";
 
 function App() {
   const [showContact, setShowContact] = useState(false);
@@ -28,7 +29,10 @@ function App() {
       {showContact && (
         <ContactModal onClose={() => setShowContact(false)} />
       )}
+
+      <Footer/>
     </BrowserRouter>
+  
   );
 }
 
