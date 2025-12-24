@@ -1,24 +1,34 @@
-import logo from './logo.svg';
+import { useState } from "react";
 import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import Navbar from './components/Navbar';
+import ContactModal from "./components/ContactModal";
+
+import Home from "./pages/Home";
+import ProductsPage from "./pages/ProductsPage";
+import AboutPage from "./pages/AboutPage";
 
 function App() {
+  const [showContact, setShowContact] = useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      {/* Navbar always visible */}
+      <Navbar onContactClick={() => setShowContact(true)} />
+
+      {/* Pages */}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/products" element={<ProductsPage />} />
+        <Route path="/about" element={<AboutPage />} />
+      </Routes>
+
+      {/* Contact Modal */}
+      {showContact && (
+        <ContactModal onClose={() => setShowContact(false)} />
+      )}
+    </BrowserRouter>
   );
 }
 
